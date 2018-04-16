@@ -22,6 +22,10 @@ public class Model {
 	
 	}
 	
+	
+	
+	
+	
 	public void reset() {
 		this.board.reset() ;
 		this.statusText.set("Board Reset");

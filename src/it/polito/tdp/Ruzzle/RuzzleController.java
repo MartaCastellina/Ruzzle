@@ -21,7 +21,9 @@ public class RuzzleController {
 	
 	private Model model ; 
 	
-	private Map<Pos,Button> letters ;
+	private Map<Pos,Button> letters ; //Mette in corrispondenza i bottoni con le posizioni vere e proprie
+	//16 oggetti button, ma chi dice qual è il button che sta in alto a sx per esempio?
+	//Solo controller può gestire questa corrispondenza
 	
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -152,6 +154,7 @@ public class RuzzleController {
     	this.letters.put(new Pos(3,3), let33) ;
 
     	for(Pos cell: m.getBoard().getPositions()) {
+    		//Chiedo al modello di darmi la board e la position
     		this.letters.get(cell).textProperty().bind(m.getBoard().getCellValueProperty(cell));
     	}
     	

@@ -13,9 +13,14 @@ import javafx.beans.property.StringProperty;
  * @author Fulvio
  *
  */
+
+//Board sa lo stato del gioco
+
 public class Board {
 	private List<Pos> positions;
-	private Map<Pos, StringProperty> cells;
+	private Map<Pos, StringProperty> cells; //Data una certa posizione qual è la stringa contenuta?
+	//Uso string property così le lettere che aggiungo si aggiungono in automatico (invece di aggiornare ogni volta quando aggiungo lettera)
+	
 
 	private int size;
 
@@ -66,9 +71,32 @@ public class Board {
 	public void reset() {
 		for(Pos p: this.positions) {
 			int random = (int)(Math.random()*26) ;
+			//Prende numeri da 0 a 25 e trasforma in stringa
 			String letter = Character.toString((char)('A'+random)) ;
 			this.cells.get(p).set(letter); 
 		}
+	}
+
+	public List<Pos> getAdiacenti(Pos ultima) {
+
+		List <Pos> result=new ArrayList<>();
+		
+		for (int r=-1;r<=1;r++) {
+			for (int c=-1;c<=1;c++) {
+				//Tutte le 9 posizioni nell'intorno della cella
+				
+				if (r!=0 || c!= 0) { //Esclusa la cella stessa(offset 0,0)
+					Pos p=new Pos(ultima.getRow()+r, ultima.getCol()+c);
+					if(positions.contains(p)) {
+						result.add(p);
+					}
+					
+				}
+			}
+		}
+		
+		
+		return result;
 	}
 
 	
